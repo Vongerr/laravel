@@ -21,7 +21,7 @@ return new class extends Migration
             $table->float('money', 14);
             $table->float('bank', 10);
             $table->float('comment', 250);
-            $table->tinyInteger('exclusion', 1);
+            $table->tinyInteger('exclusion');
             $table->timestamps();
             $table->index('category', "ix_{$this->table}_category");
             $table->index('budget_category', "ix_{$this->table}_budget_category");
