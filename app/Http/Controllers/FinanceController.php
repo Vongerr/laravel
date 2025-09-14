@@ -3,36 +3,89 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finance;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class FinanceController extends Controller
 {
-    public function index(): Collection
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): View
     {
-        return Finance::all();
+        $models = Finance::latest()->paginate(10);
+        return view('products.index', compact('models'));
     }
 
-    public function store(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): View
     {
-        return Finance::create($request->all());
+        return view('products.create');
     }
 
-    public function show(Finance $finance): Finance
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request): RedirectResponse
     {
-        return $finance;
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:0'
+        ]);
+
+        Finance::create($request->all());
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product created successfully.');
     }
 
-    public function update(Request $request, Finance $finance): Finance
+    /**
+     * Display the specified resource.
+     */
+    public function show(Finance $model): View
     {
-        $finance->update($request->all());
-        return $finance;
+        return view('products.show', compact('model'));
     }
 
-    public function destroy(Finance $finance): Response
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Finance $model): View
     {
-        $finance->delete();
-        return response()->noContent();
+        return view('products.edit', compact('model'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Finance $model): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:0'
+        ]);
+
+        $model->update($request->all());
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Finance $model): RedirectResponse
+    {
+        $model->delete();
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product deleted successfully.');
     }
 }
