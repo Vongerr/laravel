@@ -7,7 +7,7 @@
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <h2>Products List</h2>
-            <a href="{{ route('finances.create') }}" class="btn btn-primary">Create Product</a>
+            <a href="{{ route('finance.create') }}" class="btn btn-primary">Create Product</a>
         </div>
     </div>
     <div class="card-body">
@@ -29,9 +29,9 @@
                 <td>${{ number_format($model->date, 2) }}</td>
                 <td>{{ $model->money }}</td>
                 <td>
-                    <a href="{{ route('finances.show', $model->id) }}" class="btn btn-info btn-sm">View</a>
-                    <a href="{{ route('finances.edit', $model->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('finances.destroy', $model->id) }}" method="POST" class="d-inline">
+                    <a href="{{ route('finance.show', $model->id) }}" class="btn btn-info btn-sm">View</a>
+                    <a href="{{ route('finance.edit', $model->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('finance.destroy', $model->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm"
@@ -43,7 +43,7 @@
             </tbody>
         </table>
 
-        {{ $finances->links() }}
+        {{ $models->links() }}
     </div>
 </div>
 @endsection

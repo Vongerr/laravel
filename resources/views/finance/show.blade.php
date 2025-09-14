@@ -20,14 +20,14 @@
             </div>
 
             <div class="mt-4">
-                <a href="{{ route('finances.edit', $finance->id) }}" class="btn btn-warning">Edit</a>
-                <form action="{{ route('finances.destroy', $finance->id) }}" method="POST" class="d-inline">
+                <a href="{{ route('finance.edit', $finance->id) }}" class="btn btn-warning">Edit</a>
+                <form action="{{ route('finance.destroy', $finance->id) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
                             onclick="return confirm('Are you sure you want to delete this finance?')">Delete</button>
                 </form>
-                <a href="{{ route('finances.index') }}" class="btn btn-secondary">Back to List</a>
+                <a href="{{ route('finance.index') }}" class="btn btn-secondary">Back to List</a>
             </div>
         </div>
     </div>

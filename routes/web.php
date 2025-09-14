@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('finance', FinanceController::class);
+Route::get('/finance', [FinanceController::class, 'index']);
+Route::get('/finance/create', [FinanceController::class, 'create'])->name('finance.create');
+Route::post('/finance/store', [FinanceController::class, 'store']);

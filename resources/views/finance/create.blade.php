@@ -8,7 +8,7 @@
             <h2>Создать новый пункт</h2>
         </div>
         <div class="card-body">
-            <form action="{{ route('finances.store') }}" method="POST">
+            <form action="{{ route('finance.store') }}" method="POST">
                 @csrf
 
                 <div class="mb-3">
@@ -50,7 +50,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Создать пункт</button>
-                <a href="{{ route('finances.index') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route('finance.index') }}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>

@@ -15,7 +15,7 @@ class FinanceController extends Controller
     public function index(): View
     {
         $models = Finance::latest()->paginate(10);
-        return view('products.index', compact('models'));
+        return view('finance.index', compact('models'));
     }
 
     /**
@@ -23,7 +23,7 @@ class FinanceController extends Controller
      */
     public function create(): View
     {
-        return view('products.create');
+        return view('finance.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class FinanceController extends Controller
 
         Finance::create($request->all());
 
-        return redirect()->route('products.index')
+        return redirect()->route('finances.index')
             ->with('success', 'Product created successfully.');
     }
 
@@ -49,7 +49,7 @@ class FinanceController extends Controller
      */
     public function show(Finance $model): View
     {
-        return view('products.show', compact('model'));
+        return view('finance.show', compact('model'));
     }
 
     /**
@@ -57,7 +57,7 @@ class FinanceController extends Controller
      */
     public function edit(Finance $model): View
     {
-        return view('products.edit', compact('model'));
+        return view('finance.edit', compact('model'));
     }
 
     /**
@@ -74,7 +74,7 @@ class FinanceController extends Controller
 
         $model->update($request->all());
 
-        return redirect()->route('products.index')
+        return redirect()->route('finance.index')
             ->with('success', 'Product updated successfully.');
     }
 
@@ -85,7 +85,7 @@ class FinanceController extends Controller
     {
         $model->delete();
 
-        return redirect()->route('products.index')
+        return redirect()->route('finance.index')
             ->with('success', 'Product deleted successfully.');
     }
 }
