@@ -6,8 +6,8 @@
 <div class="card">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
-            <h2>Products List</h2>
-            <a href="{{ route('finance.create') }}" class="btn btn-primary">Create Product</a>
+            <h2>Финансы</h2>
+            <a href="{{ route('finance.create') }}" class="btn btn-primary">Создание пункта</a>
         </div>
     </div>
     <div class="card-body">
@@ -30,12 +30,12 @@
                 <td>{{ $model->money }}</td>
                 <td>
                     <a href="{{ route('finance.show', $model->id) }}" class="btn btn-info btn-sm">View</a>
-                    <a href="{{ route('finance.edit', $model->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ route('finance.edit', $model->id) }}" class="btn btn-warning btn-sm">Редактировать</a>
                     <form action="{{ route('finance.destroy', $model->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure?')">Delete</button>
+                                onclick="return confirm('Вы действительно хотите удалить?')">Удалить</button>
                     </form>
                 </td>
             </tr>

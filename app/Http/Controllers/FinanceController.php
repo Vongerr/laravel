@@ -9,60 +9,53 @@ use Illuminate\View\View;
 
 class FinanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+    }
+
     public function index(): View
     {
         $models = Finance::latest()->paginate(10);
+
         return view('finance.index', compact('models'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): View
     {
-        return view('finance.create');
+        $banks = [
+            'vtb' => 'ВТБ',
+            'tinkoff' => 'Тинькофф',
+            'alfa' => 'Альфа-Банк',
+        ];
+
+        $categories = [
+            'vtb' => 'ВТБ',
+            'tinkoff' => 'Тинькофф',
+            'alfa' => 'Альфа-Банк',
+        ];
+
+        return view('finance.create', compact('banks', 'categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'quantity' => 'required|integer|min:0'
-        ]);
+        $model = Finance::create($request);
 
-        Finance::create($request->all());
+        $model->save();
 
-        return redirect()->route('finances.index')
-            ->with('success', 'Product created successfully.');
+        return redirect()->route('finances.index')->with('success', 'Пункт создан.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Finance $model): View
     {
         return view('finance.show', compact('model'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Finance $model): View
     {
         return view('finance.edit', compact('model'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Finance $model): RedirectResponse
     {
         $request->validate([
@@ -78,9 +71,6 @@ class FinanceController extends Controller
             ->with('success', 'Product updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Finance $model): RedirectResponse
     {
         $model->delete();

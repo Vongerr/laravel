@@ -12,19 +12,44 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Название банка</label>
-                    <input type="text" class="form-control @error('bank') is-invalid @enderror"
-                           id="bank" name="bank" value="{{ old('bank') }}" required>
-                    @error('bank')
+                    <label for="budget_category" class="form-label">Категория бюджета</label>
+                    <input type="text" class="form-control @error('budget_category') is-invalid @enderror"
+                           id="budget_category" name="budget_category" value="{{ old('budget_category') }}" required>
+                    @error('budget_category')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="category" class="form-label">Категория</label>
+                    <select class="form-select @error('category') is-invalid @enderror"
+                           id="category" name="category" required>
+                    <option value="">-- Выберите категорию --</option>
+                    @foreach($categories as $code => $name)
+                        <option value="{{ $code }}" {{ old('category') == $code ? 'selected' : '' }}>
+                            {{ $name }}
+                        </option>
+                    @endforeach
+                    </select>
+                    @error('category')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="date" class="form-label">Дата</label>
-                    <textarea class="form-control @error('date') is-invalid @enderror"
-                              id="date" name="date" rows="3" required>{{ old('date') }}</textarea>
+                    <input type="date" class="form-control @error('date') is-invalid @enderror"
+                              id="date" name="date" required>{{ old('date') }}
                     @error('date')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="time" class="form-label">Время</label>
+                    <input type="time" class="form-control @error('time') is-invalid @enderror"
+                              id="time" name="time" required>{{ old('time') }}
+                    @error('time')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -38,15 +63,31 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label for="category" class="form-label">Категория</label>
-                        <input type="number" class="form-control @error('category') is-invalid @enderror"
-                               id="category" name="category" value="{{ old('category') }}" required>
-                        @error('category')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                <div class="mb-3">
+                    <label for="bank" class="form-label">Название банка</label>
+                    <select class="form-select @error('bank') is-invalid @enderror"
+                            id="bank" name="bank" required>
+                        <option value="">-- Выберите банк --</option>
+                        @foreach($banks as $code => $name)
+                            <option value="{{ $code }}" {{ old('bank') == $code ? 'selected' : '' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('bank')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="exclusion" class="form-label">Исключение</label>
+                    <input type="checkbox" class="form-control @error('exclusion') is-invalid @enderror"
+                           id="exclusion" name="exclusion" value="{{ old('exclusion') }}" required>
+                    @error('exclusion')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Создать пункт</button>
