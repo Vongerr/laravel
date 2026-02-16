@@ -15,7 +15,7 @@ class FinanceController extends Controller
 
     public function index(): View
     {
-        $models = Finance::latest()->paginate(10);
+        $models = Finance::factory()->newModel();
 
         return view('finance.index', compact('models'));
     }

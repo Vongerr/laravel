@@ -15,6 +15,11 @@
                     <label for="budget_category" class="form-label">Категория бюджета</label>
                     <input type="text" class="form-control @error('budget_category') is-invalid @enderror"
                            id="budget_category" name="budget_category" value="{{ old('budget_category') }}" required>
+                    @foreach($categories as $code => $name)
+                        <option value="{{ $code }}" {{ old('category') == $code ? 'selected' : '' }}>
+                            {{ $name }}
+                        </option>
+                    @endforeach
                     @error('budget_category')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
